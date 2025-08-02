@@ -71,11 +71,19 @@ WSGI_APPLICATION = 'kandahub.wsgi.application'
 
 # Database: uses DATABASE_URL from environment or fallback to SQLite
 
+import dj_database_url
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+RENDER = os.environ.get('RENDER', None) is not None
+
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600,
-        ssl_require=True,
+        ssl_require=RENDER  # Only True on Render
     )
 }
 
