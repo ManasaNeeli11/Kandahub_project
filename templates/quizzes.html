@@ -128,6 +128,8 @@
 
             {% if quiz.id %}
               <a href="{% url 'quiz_detail' quiz.id %}" class="btn btn-start-quiz w-100 mt-auto">Start Quiz</a>
+
+
             {% else %}
               <button class="btn btn-secondary w-100 mt-auto" disabled>Invalid Quiz</button>
             {% endif %}

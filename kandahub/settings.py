@@ -30,10 +30,11 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 
 # Allowed hosts
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'kandahub.onrender.com']
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'kandahub.onrender.com']
+ALLOWED_HOSTS = ['.onrender.com']
 
-if not DEBUG:
-    ALLOWED_HOSTS.append('kandahub.onrender.com')
+#if not DEBUG:
+    #ALLOWED_HOSTS.append('kandahub.onrender.com')
 
 # Application definition
 

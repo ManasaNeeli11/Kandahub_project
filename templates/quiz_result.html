@@ -13,6 +13,7 @@
       color: #4a3000;
       padding: 3rem 1rem;
       text-align: center;
+      overflow-x: hidden;
     }
     h1 {
       text-shadow: 0 0 8px #f57c00;
@@ -26,14 +27,26 @@
       box-shadow: 0 4px 15px rgba(245, 124, 0, 0.5);
       font-size: 1.8rem;
       font-weight: 700;
+      animation: pop-in 0.8s ease-out;
     }
-    .score-box:hover{
+    .score-box:hover {
       background-color: #f9a825;
       color: #3e2723;
       box-shadow: 0 0 16px #fbc02d;
     }
     a.btn {
       margin-top: 2rem;
+    }
+
+    @keyframes pop-in {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
   </style>
 </head>
@@ -44,5 +57,34 @@
   </div>
   <br>
   <a href="{% url 'quizzes' %}" class="btn btn-primary mt-4">Back to Quizzes</a>
+
+  <!-- 🎉 Confetti effect -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  function launchRibbons() {
+    const duration = 3 * 1000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 3,
+        angle: 90,
+        spread: 180,
+        startVelocity: 30,
+        origin: { x: Math.random(), y: 0 },
+        colors: ['#0000ff', '#1e90ff', '#ff0000', '#dc143c'],  // Pure blue, light blue, red, crimson
+        shapes: ['square', 'circle']
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  }
+
+  // Launch on page load
+  window.onload = launchRibbons;
+</script>
+
 </body>
 </html>

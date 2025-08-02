@@ -3,9 +3,23 @@ services:
     name: kandahub
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn kandahub.wsgi"
-    healthCheckPath: "/"
-    autoDeploy: true
-    deployCommand: |
-      python manage.py migrate
-      
+    startCommand: "gunicorn kandahub.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: kandahub.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kandahub-db
+          property: connectionString
+
+databases:
+  - name: kandahub-db
+    databaseName: kandahub1
+    user: kandahub_user
+
+
+
+
+

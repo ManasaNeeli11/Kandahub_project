@@ -3,7 +3,6 @@ import logging
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login , logout as auth_logout
 from django.conf import settings
 from .models import Quiz, Question, Choice, UserQuizResponse
@@ -18,12 +17,7 @@ def home(request):
 #superuser
 
 
-def create_superuser(request):
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'adminpassword')
-        return HttpResponse("Superuser created successfully!")
-    else:
-        return HttpResponse("Superuser already exists.")
+
 
 
 
@@ -264,7 +258,3 @@ def custom_500(request):
 
 
 
-def list_superusers(request):
-    superusers = User.objects.filter(is_superuser=True)
-    usernames = ', '.join([user.username for user in superusers])
-    return HttpResponse(f"Superusers: {usernames}")
