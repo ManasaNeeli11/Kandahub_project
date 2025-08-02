@@ -82,8 +82,8 @@ RENDER = os.environ.get('RENDER', None) is not None
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        ssl_require=RENDER  # Only True on Render
+        conn_max_age=600
+        # Don't include ssl_require for SQLite
     )
 }
 
